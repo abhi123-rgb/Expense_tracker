@@ -10,7 +10,7 @@ const onDelete = () => { }
 
 
 
-const TransactionInfoCard = ({ title, icon, date, amount, type, hiddenDeleteBtn }) => {
+const TransactionInfoCard = ({ title, icon, date, amount, type, hiddenDeleteBtn, onDelete }) => {
   const getAmountstyles = () =>
     type === "income" ? "bg-green-50 text-green-500 " : "bg-red-50 text-red-500";
 

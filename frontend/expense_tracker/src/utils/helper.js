@@ -1,3 +1,6 @@
+import moment from "moment";
+import { data } from "react-router-dom";
+
 export const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -24,4 +27,37 @@ export const addThousandsSeperator = (num) => {
     return fractionPart
     ? `${formattedInteger}.${fractionPart}`
     : formattedInteger;
+};
+
+export const prepareExpenseBarChartData = (data = []) => {
+    const charData = data.map((item) => ({
+        category: item?.category,
+        amount: item?.amount,
+    }));
+
+    return charData;
+}
+
+export const prepareIncomeBarChartData = (data = []) => {
+    const sortedData = [...data].sort((a,b) => new Date(a.date) -new Date(b.date));
+
+    const charData = sortedData.map((item) => ({
+        month: moment(item?.date).format("Do MMM"),
+        amount: item?.amount,
+        source: item?.source,
+    }));
+
+    return charData;
+};
+
+export const prepareExpenseLineChartData = (data = []) => {
+    const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
+
+    const charData = sortedData.map((item) => ({
+        month: moment(item?.date).format("Do MMM"),
+        amount: item?.amount,
+        category: item?.category,
+    }));
+
+    return charData;
 };
